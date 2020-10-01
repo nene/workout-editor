@@ -16,6 +16,7 @@ const Bar = styled.div<BarProps>`
   padding-bottom: ${(props) => props.height};
   background: ${(props) => props.background};
   width: ${(props) => props.width};
+  transition: width 0.1s, padding-bottom 0.1s, background-color 0.1s;
 `;
 
 const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): string => {
