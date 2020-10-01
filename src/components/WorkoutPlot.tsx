@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Interval, Intensity, IntensityRange, FreeIntensity, Duration } from "make-workout";
+import { Interval, Intensity, IntensityRange, FreeIntensity, Duration, totalDuration } from "make-workout";
 
 type BarProps = {
   width: string;
@@ -36,9 +36,6 @@ const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): strin
   }
   return "#7f7f7f";
 }
-
-export const totalDuration = (intervals: Interval[]): Duration =>
-  intervals.reduce((total, interval) => total.add(interval.duration), new Duration(0));
 
 const toBarProps = (interval: Interval, workoutDuration: Duration): BarProps => ({
   background: zoneColor(interval.intensity),
