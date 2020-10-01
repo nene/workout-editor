@@ -13,10 +13,10 @@ const Bar = styled.div<BarProps>`
   border-radius: 10px;
   margin-right: 0.1%;
   vertical-align: bottom;
-  padding-bottom: ${(props) => props.height};
+  height: ${(props) => props.height};
   background: ${(props) => props.background};
   width: ${(props) => props.width};
-  transition: width 0.1s, padding-bottom 0.1s, background-color 0.1s;
+  transition: width 0.1s, height 0.1s, background-color 0.1s;
 `;
 
 const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): string => {
@@ -41,13 +41,14 @@ const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): strin
 const toBarProps = (interval: Interval, workoutDuration: Duration): BarProps => ({
   background: zoneColor(interval.intensity),
   width: `${interval.duration.seconds / workoutDuration.seconds * 100 - 0.1}%`,
-  height: `${interval.intensity.value * 25}%`,
+  height: `${interval.intensity.value * 100}%`,
 });
 
 const Plot = styled.div`
   white-space: nowrap;
   overflow: hidden;
   width: 800px;
+  height: 200px;
   background: rgba(0,0,0, 0.03);
   border-radius: 5px;
   padding: 5px;
