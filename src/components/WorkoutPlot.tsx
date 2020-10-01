@@ -1,12 +1,26 @@
 import React from "react";
+import styled from "styled-components";
 
-const Bar: React.FC<{ width: string; height: string; background: string }> = ({ width, height, background }) => (
-  <div style={{ display: "inline-block", verticalAlign: "bottom", paddingBottom: height, background, width, borderRadius: "10px", marginRight: "0.1%" }} />
-);
+const Bar = styled.div<{ width: string; height: string; background: string }>`
+  display: inline-block;
+  border-radius: 10px;
+  margin-right: 0.1%;
+  vertical-align: bottom;
+  padding-bottom: ${(props) => props.height};
+  background: ${(props) => props.background};
+  width: ${(props) => props.width};
+`;
+
+const Plot = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  width: 800px;
+  outline: 1px dashed #0c0;
+`;
 
 export const WorkoutPlot: React.FC<{}> = () => {
   return (
-    <div style={{ whiteSpace: "nowrap", overflow: "hidden", width: 800, outline: "1px dashed #0c0" }}>
+    <Plot>
       <Bar background="#7f7f7f" width="1%" height="7.5%" />
       <Bar background="#7f7f7f" width="1%" height="10%" />
       <Bar background="#7f7f7f" width="1%" height="12.5%" />
@@ -22,6 +36,6 @@ export const WorkoutPlot: React.FC<{}> = () => {
       <Bar background="#7f7f7f" width="1%" height="12.5%" />
       <Bar background="#7f7f7f" width="1%" height="10%" />
       <Bar background="#7f7f7f" width="1%" height="7.5%" />
-    </div>
+    </Plot>
   );
 }
