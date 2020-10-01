@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Interval, Intensity, IntensityRange, FreeIntensity, Duration } from "make-workout";
 
-const Bar = styled.div<{ width: string; height: string; background: string }>`
+type BarProps = {
+  width: string;
+  height: string;
+  background: string;
+};
+
+const Bar = styled.div<BarProps>`
   display: inline-block;
   border-radius: 10px;
   margin-right: 0.1%;
@@ -11,31 +18,50 @@ const Bar = styled.div<{ width: string; height: string; background: string }>`
   width: ${(props) => props.width};
 `;
 
+const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): string => {
+  if (intensity.value >= 1.18) {
+    return "#ff330c";
+  }
+  if (intensity.value >= 1.05) {
+    return "#ff6639";
+  }
+  if (intensity.value >= 0.90) {
+    return "#ffcc3f";
+  }
+  if (intensity.value >= 0.75) {
+    return "#59bf59";
+  }
+  if (intensity.value >= 0.60) {
+    return "#338cff";
+  }
+  return "#7f7f7f";
+}
+
+export const totalDuration = (intervals: Interval[]): Duration =>
+  intervals.reduce((total, interval) => total.add(interval.duration), new Duration(0));
+
+const toBarProps = (interval: Interval, workoutDuration: Duration): BarProps => ({
+  background: zoneColor(interval.intensity),
+  width: `${interval.duration.seconds / workoutDuration.seconds * 100 - 0.1}%`,
+  height: `${interval.intensity.value * 25}%`,
+});
+
 const Plot = styled.div`
   white-space: nowrap;
   overflow: hidden;
   width: 800px;
-  outline: 1px dashed #0c0;
+  background: rgba(0,0,0, 0.03);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 0;
 `;
 
-export const WorkoutPlot: React.FC<{}> = () => {
+export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) => {
+  const workoutDuration = totalDuration(intervals);
+
   return (
     <Plot>
-      <Bar background="#7f7f7f" width="1%" height="7.5%" />
-      <Bar background="#7f7f7f" width="1%" height="10%" />
-      <Bar background="#7f7f7f" width="1%" height="12.5%" />
-      <Bar background="#7f7f7f" width="1%" height="15%" />
-      <Bar background="#338cff" width="5%" height="20%" />
-      <Bar background="#ffcc3f" width="15%" height="25%" />
-      <Bar background="#338cff" width="5%" height="20%" />
-      <Bar background="#ffcc3f" width="15%" height="25%" />
-      <Bar background="#338cff" width="5%" height="20%" />
-      <Bar background="#ffcc3f" width="15%" height="25%" />
-      <Bar background="#338cff" width="5%" height="20%" />
-      <Bar background="#7f7f7f" width="1%" height="15%" />
-      <Bar background="#7f7f7f" width="1%" height="12.5%" />
-      <Bar background="#7f7f7f" width="1%" height="10%" />
-      <Bar background="#7f7f7f" width="1%" height="7.5%" />
+      { intervals.map((interval) => toBarProps(interval, workoutDuration)).map((props) => (<Bar {...props} />)) }
     </Plot>
   );
 }

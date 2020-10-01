@@ -6,9 +6,12 @@ import { ErrorMessage } from './components/ErrorMessage';
 
 const defaultWorkout = `Name: Hello
 
+Warmup: 10:00 30%..60%
+Interval: 20:00 100%
 Rest: 10:00 75%
 Interval: 20:00 100%
 Rest: 10:00 75%
+Cooldown: 10:00 60%..30%
 `;
 
 export function App() {
@@ -31,7 +34,7 @@ export function App() {
     <div>
       <h1>Workout editor</h1>
       <textarea rows={10} cols={100} onChange={onChange} value={text} />
-      <WorkoutPlot />
+      <WorkoutPlot intervals={workout.intervals} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
     </div>
