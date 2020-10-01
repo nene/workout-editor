@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { WorkoutPlot } from './components/WorkoutPlot';
 import { WorkoutStats } from './components/WorkoutStats';
 import { parse } from 'make-workout';
+import { ErrorMessage } from './components/ErrorMessage';
 
 const defaultWorkout = `Name: Hello
 
@@ -13,14 +14,14 @@ Rest: 10:00 75%
 export function App() {
   const [text, setText] = useState(defaultWorkout);
   const [workout, setWorkout] = useState(parse(defaultWorkout));
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     setText(value);
     try {
       setWorkout(parse(value));
-      setError("");
+      setError(undefined);
     } catch (e) {
       setError(e.message);
     }
@@ -31,7 +32,7 @@ export function App() {
       <h1>Workout editor</h1>
       <textarea rows={10} cols={100} onChange={onChange} value={text} />
       <WorkoutPlot />
-      <div>{error}</div>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
     </div>
   );
