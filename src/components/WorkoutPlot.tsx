@@ -38,10 +38,10 @@ const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): strin
   return "#7f7f7f";
 }
 
-const toBarProps = (interval: Interval, workoutDuration: Duration): BarProps => ({
+const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
   background: zoneColor(interval.intensity),
   width: `${interval.duration.seconds / workoutDuration.seconds * 100 - 0.1}%`,
-  height: `${interval.intensity.value * 100}%`,
+  height: `${interval.intensity.value / maxIntensity.value * 100}%`,
 });
 
 const Plot = styled.div`
@@ -55,12 +55,16 @@ const Plot = styled.div`
   margin: 10px 0;
 `;
 
+const maximumIntensity = (intervals: Interval[]): Intensity =>
+  new Intensity(Math.max(...intervals.map(interval => Math.max(interval.intensity.start, interval.intensity.end))));
+
 export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) => {
   const workoutDuration = totalDuration(intervals);
+  const maxIntensity = maximumIntensity(intervals);
 
   return (
     <Plot>
-      { intervals.map((interval) => toBarProps(interval, workoutDuration)).map((props) => (<Bar {...props} />)) }
+      { intervals.map((interval) => toBarProps(interval, workoutDuration, maxIntensity)).map((props) => (<Bar {...props} />)) }
     </Plot>
   );
 }
