@@ -1,23 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Interval, Intensity, Duration, totalDuration, ZoneIndex, intensityToZoneIndex, maximumIntensity } from "make-workout";
-
-type BarProps = {
-  width: string;
-  height: string;
-  background: string;
-};
-
-const Bar = styled.div<BarProps>`
-  display: inline-block;
-  border-radius: 10px;
-  margin-right: 0.1%;
-  vertical-align: bottom;
-  height: ${(props) => props.height};
-  background: ${(props) => props.background};
-  width: ${(props) => props.width};
-  transition: width 0.1s, height 0.1s, background-color 0.1s;
-`;
+import { BarProps, Bar } from "./Bar";
 
 const zoneColorsMap: Record<ZoneIndex, string> = {
   0: "#7f7f7f",
