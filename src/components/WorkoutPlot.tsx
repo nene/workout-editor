@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Interval, Intensity, ConstantIntensity, Duration, totalDuration, ZoneIndex, intensityToZoneIndex } from "make-workout";
+import { Interval, Intensity, Duration, totalDuration, ZoneIndex, intensityToZoneIndex, maximumIntensity } from "make-workout";
 
 type BarProps = {
   width: string;
@@ -44,9 +44,6 @@ const Plot = styled.div`
   padding: 5px;
   margin: 10px 0;
 `;
-
-const maximumIntensity = (intervals: Interval[]): ConstantIntensity =>
-  new ConstantIntensity(Math.max(...intervals.map(interval => Math.max(interval.intensity.start, interval.intensity.end))));
 
 export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) => {
   const workoutDuration = totalDuration(intervals);
