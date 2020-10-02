@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Interval, Intensity, ConstantIntensity, Duration, totalDuration } from "make-workout";
+import { Interval, Intensity, ConstantIntensity, Duration, totalDuration, ZoneIndex, intensityToZoneIndex } from "make-workout";
 
 type BarProps = {
   width: string;
@@ -19,27 +19,17 @@ const Bar = styled.div<BarProps>`
   transition: width 0.1s, height 0.1s, background-color 0.1s;
 `;
 
-const zoneColor = (intensity: Intensity): string => {
-  if (intensity.value >= 1.18) {
-    return "#ff330c";
-  }
-  if (intensity.value >= 1.05) {
-    return "#ff6639";
-  }
-  if (intensity.value >= 0.90) {
-    return "#ffcc3f";
-  }
-  if (intensity.value >= 0.75) {
-    return "#59bf59";
-  }
-  if (intensity.value >= 0.60) {
-    return "#338cff";
-  }
-  return "#7f7f7f";
+const zoneColorsMap: Record<ZoneIndex, string> = {
+  0: "#7f7f7f",
+  1: "#338cff",
+  2: "#59bf59",
+  3: "#ffcc3f",
+  4: "#ff6639",
+  5: "#ff330c",
 }
 
 const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
-  background: zoneColor(interval.intensity),
+  background: zoneColorsMap[intensityToZoneIndex(interval.intensity)],
   width: `${interval.duration.seconds / workoutDuration.seconds * 100 - 0.1}%`,
   height: `${interval.intensity.value / maxIntensity.value * 100}%`,
 });
