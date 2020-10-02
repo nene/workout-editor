@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { WorkoutPlot } from './components/WorkoutPlot';
 import { WorkoutStats } from './components/WorkoutStats';
-import { parse } from 'make-workout';
+import { parse, chunkRangeIntervals, Duration } from 'make-workout';
 import { ErrorMessage } from './components/ErrorMessage';
 
 const defaultWorkout = `Name: Hello
@@ -13,6 +13,9 @@ Interval: 20:00 100%
 Rest: 10:00 75%
 Cooldown: 10:00 60%..30%
 `;
+
+// Split range-intervals into 1 minute chunks
+const chunkSize = new Duration(60);
 
 export function App() {
   const [text, setText] = useState(defaultWorkout);
@@ -34,7 +37,7 @@ export function App() {
     <div>
       <h1>Workout editor</h1>
       <textarea rows={10} cols={100} onChange={onChange} value={text} />
-      <WorkoutPlot intervals={workout.intervals} />
+      <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
     </div>
