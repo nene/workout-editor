@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Interval, Intensity, IntensityRange, FreeIntensity, Duration, totalDuration } from "make-workout";
+import { Interval, Intensity, ConstantIntensity, Duration, totalDuration } from "make-workout";
 
 type BarProps = {
   width: string;
@@ -19,7 +19,7 @@ const Bar = styled.div<BarProps>`
   transition: width 0.1s, height 0.1s, background-color 0.1s;
 `;
 
-const zoneColor = (intensity: Intensity | IntensityRange | FreeIntensity): string => {
+const zoneColor = (intensity: Intensity): string => {
   if (intensity.value >= 1.18) {
     return "#ff330c";
   }
@@ -55,8 +55,8 @@ const Plot = styled.div`
   margin: 10px 0;
 `;
 
-const maximumIntensity = (intervals: Interval[]): Intensity =>
-  new Intensity(Math.max(...intervals.map(interval => Math.max(interval.intensity.start, interval.intensity.end))));
+const maximumIntensity = (intervals: Interval[]): ConstantIntensity =>
+  new ConstantIntensity(Math.max(...intervals.map(interval => Math.max(interval.intensity.start, interval.intensity.end))));
 
 export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) => {
   const workoutDuration = totalDuration(intervals);
