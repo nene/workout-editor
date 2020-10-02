@@ -5,8 +5,8 @@ import { BarProps, Bar } from "./Bar";
 
 const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
   zone: intensityToZoneIndex(interval.intensity),
-  width: `${interval.duration.seconds / workoutDuration.seconds * 100 - 0.1}%`,
-  height: `${interval.intensity.value / maxIntensity.value * 100}%`,
+  durationPercentage: interval.duration.seconds / workoutDuration.seconds * 100,
+  intensityPercentage: interval.intensity.value / maxIntensity.value * 100,
 });
 
 const Plot = styled.div`
