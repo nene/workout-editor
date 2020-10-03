@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import Editor from 'react-simple-code-editor';
 import { WorkoutPlot } from './components/WorkoutPlot';
 import { WorkoutStats } from './components/WorkoutStats';
 import { parse, chunkRangeIntervals, Duration } from 'make-workout';
 import { ErrorMessage } from './components/ErrorMessage';
 import styled from 'styled-components';
+import { CodeEditor } from './components/CodeEditor';
 
 const defaultWorkout = `Name: Hello
 
@@ -23,15 +23,6 @@ const AppContainer = styled.div`
 
 const AppTitle = styled.h1`
   font-weight: normal;
-`;
-
-const CodeEditor = styled(Editor).attrs({ padding: 10 })`
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.3;
-  border: 1px inset #bbb;
-  border-radius: 3px;
-  background: #fff;
 `;
 
 // Split range-intervals into 1 minute chunks
@@ -55,7 +46,7 @@ export function App() {
   return (
     <AppContainer>
       <AppTitle>Workout editor</AppTitle>
-      <CodeEditor onValueChange={onChange} value={text} highlight={code => code} />
+      <CodeEditor onValueChange={onChange} value={text} />
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
