@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import Editor from 'react-simple-code-editor';
 import { WorkoutPlot } from './components/WorkoutPlot';
 import { WorkoutStats } from './components/WorkoutStats';
 import { parse, chunkRangeIntervals, Duration } from 'make-workout';
@@ -24,6 +25,15 @@ const AppTitle = styled.h1`
   font-weight: normal;
 `;
 
+const CodeEditor = styled(Editor).attrs({ padding: 10 })`
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.3;
+  border: 1px inset #bbb;
+  border-radius: 3px;
+  background: #fff;
+`;
+
 // Split range-intervals into 1 minute chunks
 const chunkSize = new Duration(60);
 
@@ -32,8 +42,7 @@ export function App() {
   const [workout, setWorkout] = useState(parse(defaultWorkout));
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = event.target.value;
+  const onChange = useCallback((value: string) => {
     setText(value);
     try {
       setWorkout(parse(value));
@@ -46,7 +55,7 @@ export function App() {
   return (
     <AppContainer>
       <AppTitle>Workout editor</AppTitle>
-      <textarea rows={10} cols={100} onChange={onChange} value={text} />
+      <CodeEditor onValueChange={onChange} value={text} highlight={code => code} />
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
