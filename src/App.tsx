@@ -5,6 +5,7 @@ import { parse, chunkRangeIntervals, Duration } from 'make-workout';
 import { ErrorMessage } from './components/ErrorMessage';
 import styled from 'styled-components';
 import { CodeEditor } from './components/CodeEditor';
+import { ZwoOutput } from './components/ZwoOutput';
 
 const defaultWorkout = `Name: Sample workout
 Description: Try changing it, and see what happens below.
@@ -55,6 +56,7 @@ export function App() {
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
+      <ZwoOutput workout={workout} />
     </AppContainer>
   );
 }
