@@ -6,14 +6,19 @@ import { ErrorMessage } from './components/ErrorMessage';
 import styled from 'styled-components';
 import { CodeEditor } from './components/CodeEditor';
 
-const defaultWorkout = `Name: Hello
+const defaultWorkout = `Name: Sample workout
+Description: Try changing it, and see what happens below.
 
-Warmup: 10:00 30%..60%
-Interval: 20:00 100%
+Warmup: 10:00 30%..75%
+Interval: 15:00 100% 90rpm
+  @ 00:00 Start off easy
+  @ 01:00 Settle into rythm
+  @ 07:30 Half way through
+  @ 14:00 Final minute, stay strong!
 Rest: 10:00 75%
-Interval: 20:00 100%
-FreeRide: 10:00
-Cooldown: 10:00 60%..30%
+FreeRide: 20:00
+  @ 00:10 Just have some fun, riding as you wish
+Cooldown: 10:00 70%..30%
 `;
 
 const AppContainer = styled.div`
