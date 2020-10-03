@@ -12,9 +12,7 @@ const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity:
 const Plot = styled.div`
   white-space: nowrap;
   overflow: hidden;
-  width: 800px;
   height: 200px;
-  background: rgba(0,0,0, 0.03);
   border-radius: 5px;
   padding: 5px;
   margin: 10px 0;

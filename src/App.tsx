@@ -3,6 +3,7 @@ import { WorkoutPlot } from './components/WorkoutPlot';
 import { WorkoutStats } from './components/WorkoutStats';
 import { parse, chunkRangeIntervals, Duration } from 'make-workout';
 import { ErrorMessage } from './components/ErrorMessage';
+import styled from 'styled-components';
 
 const defaultWorkout = `Name: Hello
 
@@ -12,6 +13,15 @@ Rest: 10:00 75%
 Interval: 20:00 100%
 FreeRide: 10:00
 Cooldown: 10:00 60%..30%
+`;
+
+const AppContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const AppTitle = styled.h1`
+  font-weight: normal;
 `;
 
 // Split range-intervals into 1 minute chunks
@@ -34,12 +44,12 @@ export function App() {
   }, [setText, setWorkout, setError]);
   
   return (
-    <div>
-      <h1>Workout editor</h1>
+    <AppContainer>
+      <AppTitle>Workout editor</AppTitle>
       <textarea rows={10} cols={100} onChange={onChange} value={text} />
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
-    </div>
+    </AppContainer>
   );
 }
