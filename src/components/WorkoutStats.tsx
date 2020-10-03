@@ -1,9 +1,14 @@
 import React from 'react';
 import { stats, Workout, Duration, Intensity } from 'make-workout';
-import { Duration as LuxonDuration } from 'luxon';
+
+const splitDuration = (duration: Duration) => ({
+  hours: Math.floor(duration.seconds / 60 / 60),
+  minutes: Math.floor(duration.seconds / 60) % 60,
+  seconds: duration.seconds % 60,
+});
 
 const formatDuration = (duration: Duration): string => {
-  const {hours, minutes, seconds} = LuxonDuration.fromObject({seconds: duration.seconds}).shiftTo('hours', 'minutes', 'seconds');
+  const {hours, minutes, seconds} = splitDuration(duration);
   if (hours > 0) {
     return `${hours}h ${minutes}min`;
   }
