@@ -10,7 +10,7 @@ Warmup: 10:00 30%..60%
 Interval: 20:00 100%
 Rest: 10:00 75%
 Interval: 20:00 100%
-Rest: 10:00 75%
+FreeRide: 10:00
 Cooldown: 10:00 60%..30%
 `;
 

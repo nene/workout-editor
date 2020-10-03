@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Interval, Intensity, Duration, totalDuration, intensityToZoneIndex, maximumIntensity } from "make-workout";
+import { Interval, Intensity, Duration, totalDuration, maximumIntensity } from "make-workout";
 import { BarProps, Bar } from "./Bar";
 
 const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
-  zone: intensityToZoneIndex(interval.intensity),
+  zone: interval.intensity.zone,
   durationPercentage: interval.duration.seconds / workoutDuration.seconds * 100,
   intensityPercentage: interval.intensity.value / maxIntensity.value * 100,
 });
