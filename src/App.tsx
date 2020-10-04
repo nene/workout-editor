@@ -6,7 +6,7 @@ import { ErrorMessage } from './components/ErrorMessage';
 import styled from 'styled-components';
 import { CodeEditor } from './components/CodeEditor';
 import { ZwoOutput } from './components/ZwoOutput';
-import logo from "./logo.png";
+import { AppTitle } from './components/AppTitle';
 import { Credits } from './components/Credits';
 
 const defaultWorkout = `Name: Sample workout
@@ -29,24 +29,6 @@ const AppContainer = styled.div`
   margin: 0 auto;
 `;
 
-const AppTitle = styled.h1`
-  font-weight: normal;
-`;
-
-const Logo = styled.img.attrs({ src: logo, width: 45, height: 45 })`
-  margin-right: 0.5em;
-  vertical-align: bottom;
-`;
-
-const Beta = styled.span`
-  display: inline-block;
-  color: #cc2222;
-  opacity: 0.7;
-  font-size: 20px;
-  font-weight: bold;
-  transform: rotate(20deg) translate(-15px, -8px);
-`;
-
 // Split range-intervals into 1 minute chunks
 const chunkSize = new Duration(60);
 
@@ -67,7 +49,7 @@ export function App() {
   
   return (
     <AppContainer>
-      <AppTitle><Logo />Workout editor <Beta>beta</Beta></AppTitle>
+      <AppTitle />
       <CodeEditor onValueChange={onChange} value={text} />
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
