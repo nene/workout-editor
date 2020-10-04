@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ZoneType } from "make-workout";
+import { ZoneType } from "zwiftout";
 
 export type BarProps = {
   // Percentage of total workout length

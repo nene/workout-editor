@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Interval, Intensity, Duration, totalDuration, maximumIntensity } from "make-workout";
+import { Interval, Intensity, Duration, totalDuration, maximumIntensity } from "zwiftout";
 import { BarProps, Bar } from "./Bar";
 
 const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({

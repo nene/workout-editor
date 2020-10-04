@@ -1,5 +1,5 @@
 import React from 'react';
-import { Workout, generateZwo } from 'make-workout';
+import { Workout, generateZwo } from 'zwiftout';
 import styled from 'styled-components';
 
 const Header = styled.h2`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { stats, Workout, Intensity } from 'make-workout';
+import { stats, Workout, Intensity } from 'zwiftout';
 import { formatDuration } from './formatDuration';
 import styled from 'styled-components';
 

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { WorkoutPlot } from './components/WorkoutPlot';
 import { WorkoutStats } from './components/WorkoutStats';
-import { parse, chunkRangeIntervals, Duration } from 'make-workout';
+import { parse, chunkRangeIntervals, Duration } from 'zwiftout';
 import { ErrorMessage } from './components/ErrorMessage';
 import styled from 'styled-components';
 import { CodeEditor } from './components/CodeEditor';

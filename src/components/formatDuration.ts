@@ -1,4 +1,4 @@
-import { Duration } from "make-workout";
+import { Duration } from "zwiftout";
 
 const splitDuration = (duration: Duration) => ({
   hours: Math.floor(duration.seconds / 60 / 60),
