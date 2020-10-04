@@ -6,6 +6,7 @@ import { ErrorMessage } from './components/ErrorMessage';
 import styled from 'styled-components';
 import { CodeEditor } from './components/CodeEditor';
 import { ZwoOutput } from './components/ZwoOutput';
+import logo from "./logo.png";
 
 const defaultWorkout = `Name: Sample workout
 Description: Try changing it, and see what happens below.
@@ -31,6 +32,11 @@ const AppTitle = styled.h1`
   font-weight: normal;
 `;
 
+const Logo = styled.img.attrs({ src: logo, width: 45, height: 45 })`
+  margin-right: 0.5em;
+  vertical-align: bottom;
+`;
+
 // Split range-intervals into 1 minute chunks
 const chunkSize = new Duration(60);
 
@@ -51,7 +57,7 @@ export function App() {
   
   return (
     <AppContainer>
-      <AppTitle>Workout editor</AppTitle>
+      <AppTitle><Logo />Workout editor</AppTitle>
       <CodeEditor onValueChange={onChange} value={text} />
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
