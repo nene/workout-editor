@@ -38,6 +38,15 @@ const Logo = styled.img.attrs({ src: logo, width: 45, height: 45 })`
   vertical-align: bottom;
 `;
 
+const Beta = styled.span`
+  display: inline-block;
+  color: #cc2222;
+  opacity: 0.7;
+  font-size: 20px;
+  font-weight: bold;
+  transform: rotate(20deg) translate(-15px, -8px);
+`;
+
 // Split range-intervals into 1 minute chunks
 const chunkSize = new Duration(60);
 
@@ -58,7 +67,7 @@ export function App() {
   
   return (
     <AppContainer>
-      <AppTitle><Logo />Workout editor</AppTitle>
+      <AppTitle><Logo />Workout editor <Beta>beta</Beta></AppTitle>
       <CodeEditor onValueChange={onChange} value={text} />
       <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
