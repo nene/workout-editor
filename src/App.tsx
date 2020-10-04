@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { CodeEditor } from './components/CodeEditor';
 import { ZwoOutput } from './components/ZwoOutput';
 import logo from "./logo.png";
+import { Credits } from './components/Credits';
 
 const defaultWorkout = `Name: Sample workout
 Description: Try changing it, and see what happens below.
@@ -63,6 +64,7 @@ export function App() {
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
       <ZwoOutput workout={workout} />
+      <Credits />
     </AppContainer>
   );
 }
