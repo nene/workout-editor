@@ -53,7 +53,7 @@ export const WorkoutStats: React.FC<{workout: Workout}> = ({ workout }) => {
       <Section>
         <Header>Zone distribution</Header>
         <ZoneList>
-          {zones.map(zone => (<StatsLine label={zone.name} value={formatDuration(zone.duration)} />)) }
+          {zones.map(zone => (<StatsLine key={zone.name} label={zone.name} value={formatDuration(zone.duration)} />)) }
         </ZoneList>
       </Section>
     </Container>

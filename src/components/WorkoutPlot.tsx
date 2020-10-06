@@ -24,7 +24,7 @@ export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) 
 
   return (
     <Plot>
-      { intervals.map((interval) => toBarProps(interval, workoutDuration, maxIntensity)).map((props) => (<Bar {...props} />)) }
+      { intervals.map((interval) => toBarProps(interval, workoutDuration, maxIntensity)).map((props, i) => (<Bar key={i} {...props} />)) }
     </Plot>
   );
 }
