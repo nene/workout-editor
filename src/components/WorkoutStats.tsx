@@ -47,6 +47,7 @@ export const WorkoutStats: React.FC<{ workout: Workout }> = ({ workout }) => {
     averageIntensity,
     normalizedIntensity,
     tss,
+    xp,
     zones,
   } = stats(workout);
 
@@ -65,6 +66,10 @@ export const WorkoutStats: React.FC<{ workout: Workout }> = ({ workout }) => {
             value={formatIntensity(normalizedIntensity)}
           />
           <StatsLine label="TSS:" value={Math.round(tss)} />
+          <StatsLine
+            label="Zwift XP:"
+            value={`${xp} (like riding ${Math.ceil(xp / 20)} km)`}
+          />
         </List>
       </Section>
       <Section>
