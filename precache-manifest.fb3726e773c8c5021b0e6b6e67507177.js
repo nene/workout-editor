@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e1956864b13d037040fad2ce654d8975",
+    "revision": "48497f08135e54780d2fc124f9bf93b3",
     "url": "/workout-editor/index.html"
   },
   {
-    "revision": "d1d3a28e17dbef2aba3c",
+    "revision": "36ca42164272dbad26ce",
     "url": "/workout-editor/static/css/main.e585a887.chunk.css"
   },
   {
-    "revision": "cffae269d80fd66243ce",
-    "url": "/workout-editor/static/js/2.f93ee6c5.chunk.js"
+    "revision": "ea439d7ce71bfc8ce988",
+    "url": "/workout-editor/static/js/2.3a60fc21.chunk.js"
   },
   {
     "revision": "eab6cd95c8b7f7a43af593f2585901b3",
-    "url": "/workout-editor/static/js/2.f93ee6c5.chunk.js.LICENSE.txt"
+    "url": "/workout-editor/static/js/2.3a60fc21.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d1d3a28e17dbef2aba3c",
-    "url": "/workout-editor/static/js/main.2a31c5ce.chunk.js"
+    "revision": "36ca42164272dbad26ce",
+    "url": "/workout-editor/static/js/main.5c483c45.chunk.js"
   },
   {
     "revision": "b5e368ec906fbe804156",
