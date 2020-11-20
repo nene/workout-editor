@@ -1,12 +1,18 @@
-import React from 'react';
-import { stats, Workout, Intensity } from 'zwiftout';
-import { formatDuration } from './formatDuration';
-import styled from 'styled-components';
+import React from "react";
+import { stats, Workout, Intensity } from "zwiftout";
+import { formatDuration } from "./formatDuration";
+import styled from "styled-components";
 
-const formatIntensity = (intensity: Intensity): string => `${Math.round(intensity.value * 100)}%`;
+const formatIntensity = (intensity: Intensity): string =>
+  `${Math.round(intensity.value * 100)}%`;
 
-const StatsLine: React.FC<{ label: string, value: string | number }> = ({ label, value }) => (
-  <li><strong>{label}</strong> {value}</li>
+const StatsLine: React.FC<{ label: string; value: string | number }> = ({
+  label,
+  value,
+}) => (
+  <li>
+    <strong>{label}</strong> {value}
+  </li>
 );
 
 const Container = styled.div`
@@ -35,27 +41,44 @@ const ZoneList = styled(List)`
   grid-template-columns: 1fr 1fr 1fr;
 `;
 
+export const WorkoutStats: React.FC<{ workout: Workout }> = ({ workout }) => {
+  const {
+    totalDuration,
+    averageIntensity,
+    normalizedIntensity,
+    tss,
+    zones,
+  } = stats(workout);
 
-export const WorkoutStats: React.FC<{workout: Workout}> = ({ workout }) => {
-  const {totalDuration, averageIntensity, normalizedIntensity, tss, zones} = stats(workout);
-  
   return (
     <Container>
       <Section>
         <Header>Summary</Header>
         <List>
           <StatsLine label="Duration:" value={formatDuration(totalDuration)} />
-          <StatsLine label="Average intensity:" value={formatIntensity(averageIntensity)} />
-          <StatsLine label="Normalized intensity:" value={formatIntensity(normalizedIntensity)} />
+          <StatsLine
+            label="Average intensity:"
+            value={formatIntensity(averageIntensity)}
+          />
+          <StatsLine
+            label="Normalized intensity:"
+            value={formatIntensity(normalizedIntensity)}
+          />
           <StatsLine label="TSS:" value={Math.round(tss)} />
         </List>
       </Section>
       <Section>
         <Header>Zone distribution</Header>
         <ZoneList>
-          {zones.map(zone => (<StatsLine key={zone.name} label={zone.name} value={formatDuration(zone.duration)} />)) }
+          {zones.map((zone) => (
+            <StatsLine
+              key={zone.name}
+              label={zone.name}
+              value={formatDuration(zone.duration)}
+            />
+          ))}
         </ZoneList>
       </Section>
     </Container>
-  )
+  );
 };
