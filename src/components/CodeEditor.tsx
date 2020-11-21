@@ -4,7 +4,7 @@ import styled from "styled-components";
 const highlight = (code: string): string => {
   return code
     .replace(/^(Name|Author|Description|Warmup|Rest|Interval|Cooldown|FreeRide):/gm, "<code class='keyword'>$&</code>")
-    .replace(/(\d{1,2}:)?\d{1,2}:\d{1,2}/g, "<code class='duration'>$&</code>")
+    .replace(/-?(\d{1,2}:)?\d{1,2}:\d{1,2}/g, "<code class='duration'>$&</code>")
     .replace(/\d+%/g, "<code class='intensity'>$&</code>")
     .replace(/\d+rpm/g, "<code class='cadence'>$&</code>")
     .replace(/\.\./g, "<code class='range'>$&</code>")
