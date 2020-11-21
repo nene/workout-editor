@@ -1,6 +1,6 @@
-import React from 'react';
-import { Workout, generateZwo } from 'zwiftout';
-import styled from 'styled-components';
+import React from "react";
+import { Workout, generateZwo } from "zwiftout";
+import styled from "styled-components";
 
 const Header = styled.h2`
   font-weight: normal;
@@ -19,5 +19,5 @@ export const ZwoOutput: React.FC<{ workout: Workout }> = ({ workout }) => {
       <Header>Generated Zwift workout file (.zwo):</Header>
       <ZwoCode>{generateZwo(workout)}</ZwoCode>
     </div>
-  )
+  );
 };

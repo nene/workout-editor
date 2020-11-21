@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import logo from "../logo.png";
 
@@ -21,5 +21,8 @@ const Beta = styled.span`
 `;
 
 export const AppTitle: React.FC<{}> = () => (
-  <Title><Logo />Workout editor <Beta>beta</Beta></Title>
+  <Title>
+    <Logo />
+    Workout editor <Beta>beta</Beta>
+  </Title>
 );

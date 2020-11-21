@@ -5,8 +5,8 @@ import { BarProps, Bar } from "./Bar";
 
 const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
   zone: interval.intensity.zone,
-  durationPercentage: interval.duration.seconds / workoutDuration.seconds * 100,
-  intensityPercentage: interval.intensity.value / maxIntensity.value * 100,
+  durationPercentage: (interval.duration.seconds / workoutDuration.seconds) * 100,
+  intensityPercentage: (interval.intensity.value / maxIntensity.value) * 100,
 });
 
 const Plot = styled.div`
@@ -24,7 +24,11 @@ export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) 
 
   return (
     <Plot>
-      { intervals.map((interval) => toBarProps(interval, workoutDuration, maxIntensity)).map((props, i) => (<Bar key={i} {...props} />)) }
+      {intervals
+        .map((interval) => toBarProps(interval, workoutDuration, maxIntensity))
+        .map((props, i) => (
+          <Bar key={i} {...props} />
+        ))}
     </Plot>
   );
-}
+};

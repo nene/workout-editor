@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { WorkoutPlot } from './components/WorkoutPlot';
-import { WorkoutStats } from './components/WorkoutStats';
-import { parse, chunkRangeIntervals, Duration } from 'zwiftout';
-import { ErrorMessage } from './components/ErrorMessage';
-import styled from 'styled-components';
-import { CodeEditor } from './components/CodeEditor';
-import { ZwoOutput } from './components/ZwoOutput';
-import { AppTitle } from './components/AppTitle';
-import { Credits } from './components/Credits';
+import React, { useState, useCallback } from "react";
+import { WorkoutPlot } from "./components/WorkoutPlot";
+import { WorkoutStats } from "./components/WorkoutStats";
+import { parse, chunkRangeIntervals, Duration } from "zwiftout";
+import { ErrorMessage } from "./components/ErrorMessage";
+import styled from "styled-components";
+import { CodeEditor } from "./components/CodeEditor";
+import { ZwoOutput } from "./components/ZwoOutput";
+import { AppTitle } from "./components/AppTitle";
+import { Credits } from "./components/Credits";
 
 const defaultWorkout = `Name: Sample workout
 Description: Try changing it, and see what happens below.
@@ -37,16 +37,19 @@ export function App() {
   const [workout, setWorkout] = useState(parse(defaultWorkout));
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const onChange = useCallback((value: string) => {
-    setText(value);
-    try {
-      setWorkout(parse(value));
-      setError(undefined);
-    } catch (e) {
-      setError(e.message);
-    }
-  }, [setText, setWorkout, setError]);
-  
+  const onChange = useCallback(
+    (value: string) => {
+      setText(value);
+      try {
+        setWorkout(parse(value));
+        setError(undefined);
+      } catch (e) {
+        setError(e.message);
+      }
+    },
+    [setText, setWorkout, setError],
+  );
+
   return (
     <AppContainer>
       <AppTitle />

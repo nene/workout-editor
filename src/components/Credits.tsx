@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Text = styled.p`
   font-size: 12px;
@@ -12,10 +12,7 @@ const Text = styled.p`
 
 export const Credits: React.FC<{}> = () => (
   <Text>
-    Built by Rene Saarsoo.
-    ·
-    Graphics inspired by <a href="https://whatsonzwift.com/workouts/">What's on Zwift?</a>
-    &nbsp;·
-    Sweat provided by <a href="https://zwift.com">Zwift</a> :-)
+    Built by Rene Saarsoo. · Graphics inspired by <a href="https://whatsonzwift.com/workouts/">What's on Zwift?</a>
+    &nbsp;· Sweat provided by <a href="https://zwift.com">Zwift</a> :-)
   </Text>
-)
+);
