@@ -1,5 +1,5 @@
 import React from "react";
-import { stats, Workout, Intensity } from "zwiftout";
+import { stats, Workout, Intensity, Duration } from "zwiftout";
 import { formatDuration } from "./formatDuration";
 import styled from "styled-components";
 
@@ -56,6 +56,13 @@ const ZoneList = styled(List)`
   grid-template-columns: 1fr 1fr 1fr;
 `;
 
+const xpEquivalent = (xp: number, totalDuration: Duration): string => {
+  const distanceInKm = Math.ceil(xp / 20);
+  const durationInHours = totalDuration.seconds / 60 / 60;
+  const speed = Math.round(distanceInKm / durationInHours);
+  return `equivalent to riding ${distanceInKm} km at ${speed} km/h`;
+};
+
 export const WorkoutStats: React.FC<{ workout: Workout }> = ({ workout }) => {
   const { totalDuration, averageIntensity, normalizedIntensity, tss, xp, zones } = stats(workout);
 
@@ -79,7 +86,7 @@ export const WorkoutStats: React.FC<{ workout: Workout }> = ({ workout }) => {
         </ZoneList>
       </ZonesSection>
       <XpSection>
-        <StatsLine label="Zwift XP:" value={`${xp} (like riding ${Math.ceil(xp / 20)} km)`} />
+        <StatsLine label="Zwift XP:" value={`${xp} (${xpEquivalent(xp, totalDuration)})`} />;
       </XpSection>
     </Container>
   );
