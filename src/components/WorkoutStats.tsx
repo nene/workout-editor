@@ -5,22 +5,41 @@ import styled from "styled-components";
 
 const formatIntensity = (intensity: Intensity): string => `${Math.round(intensity.value * 100)}%`;
 
-const StatsLine: React.FC<{ label: string; value: string | number }> = ({ label, value }) => (
-  <li>
+type StatsProps = { label: string; value: string | number };
+
+const StatsLine: React.FC<StatsProps> = ({ label, value }) => (
+  <>
     <strong>{label}</strong> {value}
+  </>
+);
+
+const StatsListItem: React.FC<StatsProps> = (props) => (
+  <li>
+    <StatsLine {...props} />
   </li>
 );
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "summary  zones"
+    "xp       xp   ";
   border: 1px solid #bbb;
   border-radius: 10px;
   padding: 10px;
   font-size: 12px;
   background: rgba(255, 255, 255, 0.6);
 `;
-const Section = styled.section``;
+const SummarySection = styled.section`
+  grid-area: summary;
+`;
+const ZonesSection = styled.section`
+  grid-area: zones;
+`;
+const XpSection = styled.section`
+  grid-area: xp;
+`;
 
 const Header = styled.h2`
   margin: 0;
@@ -42,24 +61,26 @@ export const WorkoutStats: React.FC<{ workout: Workout }> = ({ workout }) => {
 
   return (
     <Container>
-      <Section>
+      <SummarySection>
         <Header>Summary</Header>
         <List>
-          <StatsLine label="Duration:" value={formatDuration(totalDuration)} />
-          <StatsLine label="Average intensity:" value={formatIntensity(averageIntensity)} />
-          <StatsLine label="Normalized intensity:" value={formatIntensity(normalizedIntensity)} />
-          <StatsLine label="TSS:" value={Math.round(tss)} />
-          <StatsLine label="Zwift XP:" value={`${xp} (like riding ${Math.ceil(xp / 20)} km)`} />
+          <StatsListItem label="Duration:" value={formatDuration(totalDuration)} />
+          <StatsListItem label="Average intensity:" value={formatIntensity(averageIntensity)} />
+          <StatsListItem label="Normalized intensity:" value={formatIntensity(normalizedIntensity)} />
+          <StatsListItem label="TSS:" value={Math.round(tss)} />
         </List>
-      </Section>
-      <Section>
+      </SummarySection>
+      <ZonesSection>
         <Header>Zone distribution</Header>
         <ZoneList>
           {zones.map((zone) => (
-            <StatsLine key={zone.name} label={zone.name} value={formatDuration(zone.duration)} />
+            <StatsListItem key={zone.name} label={zone.name} value={formatDuration(zone.duration)} />
           ))}
         </ZoneList>
-      </Section>
+      </ZonesSection>
+      <XpSection>
+        <StatsLine label="Zwift XP:" value={`${xp} (like riding ${Math.ceil(xp / 20)} km)`} />
+      </XpSection>
     </Container>
   );
 };
