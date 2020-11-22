@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { WorkoutPlot } from "./components/WorkoutPlot";
 import { WorkoutStats } from "./components/WorkoutStats";
-import { parse, chunkRangeIntervals, Duration } from "zwiftout";
+import { parse } from "zwiftout";
 import { ErrorMessage } from "./components/ErrorMessage";
 import styled from "styled-components";
 import { CodeEditor } from "./components/CodeEditor";
@@ -29,9 +29,6 @@ const AppContainer = styled.div`
   margin: 0 auto;
 `;
 
-// Split range-intervals into 1 minute chunks
-const chunkSize = new Duration(60);
-
 export function App() {
   const [text, setText] = useState(defaultWorkout);
   const [workout, setWorkout] = useState(parse(defaultWorkout));
@@ -54,7 +51,7 @@ export function App() {
     <AppContainer>
       <AppTitle />
       <CodeEditor onValueChange={onChange} value={text} />
-      <WorkoutPlot intervals={chunkRangeIntervals(workout.intervals, chunkSize)} />
+      <WorkoutPlot intervals={workout.intervals} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <WorkoutStats workout={workout} />
       <ZwoOutput workout={workout} />
