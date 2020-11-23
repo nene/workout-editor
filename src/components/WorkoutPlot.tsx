@@ -11,12 +11,6 @@ import {
 } from "zwiftout";
 import { BarProps, Bar, RangeBar, RangeBarProps } from "./Bar";
 
-const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
-  zone: interval.intensity.zone,
-  durationPercentage: (interval.duration.seconds / workoutDuration.seconds) * 100,
-  intensityPercentage: (interval.intensity.value / maxIntensity.value) * 100,
-});
-
 const Plot = styled.div`
   white-space: nowrap;
   overflow: hidden;
@@ -25,6 +19,12 @@ const Plot = styled.div`
   padding: 5px;
   margin: 10px 0;
 `;
+
+const toBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): BarProps => ({
+  zone: interval.intensity.zone,
+  durationPercentage: (interval.duration.seconds / workoutDuration.seconds) * 100,
+  intensityPercentage: (interval.intensity.value / maxIntensity.value) * 100,
+});
 
 const toRangeBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): RangeBarProps => {
   const minIntensityPercentage =
