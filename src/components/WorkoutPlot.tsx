@@ -26,13 +26,21 @@ const Plot = styled.div`
   margin: 10px 0;
 `;
 
-const toRangeBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): RangeBarProps => ({
-  startZone: intensityValueToZoneType(interval.intensity.start),
-  endZone: intensityValueToZoneType(interval.intensity.end),
-  durationPercentage: (interval.duration.seconds / workoutDuration.seconds) * 100,
-  intensityStartPercentage: (interval.intensity.start / maxIntensity.value) * 100,
-  intensityEndPercentage: (interval.intensity.end / maxIntensity.value) * 100,
-});
+const toRangeBarProps = (interval: Interval, workoutDuration: Duration, maxIntensity: Intensity): RangeBarProps => {
+  const minIntensityPercentage =
+    (Math.min(interval.intensity.start, interval.intensity.end) / maxIntensity.value) * 100;
+  const maxIntensityPercentage =
+    (Math.max(interval.intensity.start, interval.intensity.end) / maxIntensity.value) * 100;
+
+  return {
+    durationPercentage: (interval.duration.seconds / workoutDuration.seconds) * 100,
+    maxIntensityPercentage: maxIntensityPercentage,
+    relativeMinIntensityPercentage: 100 - (minIntensityPercentage / maxIntensityPercentage) * 100,
+    direction: interval.intensity.start < interval.intensity.end ? "up" : "down",
+    startZone: intensityValueToZoneType(interval.intensity.start),
+    endZone: intensityValueToZoneType(interval.intensity.end),
+  };
+};
 
 export const WorkoutPlot: React.FC<{ intervals: Interval[] }> = ({ intervals }) => {
   const workoutDuration = totalDuration(intervals);
