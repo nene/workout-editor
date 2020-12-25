@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/workout-editor/static/css/main.20aa8553.chunk.css",
-    "main.js": "/workout-editor/static/js/main.4b7a8f6f.chunk.js",
-    "main.js.map": "/workout-editor/static/js/main.4b7a8f6f.chunk.js.map",
+    "main.js": "/workout-editor/static/js/main.76098227.chunk.js",
+    "main.js.map": "/workout-editor/static/js/main.76098227.chunk.js.map",
     "runtime-main.js": "/workout-editor/static/js/runtime-main.766fd1ba.js",
     "runtime-main.js.map": "/workout-editor/static/js/runtime-main.766fd1ba.js.map",
     "static/js/2.b48a3bc0.chunk.js": "/workout-editor/static/js/2.b48a3bc0.chunk.js",
     "static/js/2.b48a3bc0.chunk.js.map": "/workout-editor/static/js/2.b48a3bc0.chunk.js.map",
     "index.html": "/workout-editor/index.html",
-    "precache-manifest.7461dbd6d5601f13aabef61166f9015f.js": "/workout-editor/precache-manifest.7461dbd6d5601f13aabef61166f9015f.js",
+    "precache-manifest.e595006a1dc3aabc6c8efeac41232097.js": "/workout-editor/precache-manifest.e595006a1dc3aabc6c8efeac41232097.js",
     "service-worker.js": "/workout-editor/service-worker.js",
     "static/css/main.20aa8553.chunk.css.map": "/workout-editor/static/css/main.20aa8553.chunk.css.map",
     "static/js/2.b48a3bc0.chunk.js.LICENSE.txt": "/workout-editor/static/js/2.b48a3bc0.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.766fd1ba.js",
     "static/js/2.b48a3bc0.chunk.js",
     "static/css/main.20aa8553.chunk.css",
-    "static/js/main.4b7a8f6f.chunk.js"
+    "static/js/main.76098227.chunk.js"
   ]
 }
