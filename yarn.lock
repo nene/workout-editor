@@ -11075,10 +11075,10 @@ yargs@^13.3.0, yargs@^13.3.2:
     y18n "^4.0.0"
     yargs-parser "^13.1.2"
 
-zwiftout@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/zwiftout/-/zwiftout-0.5.0.tgz#ca46fa1e0f16fba185bce97ba8f1d3674011ceff"
-  integrity sha512-GHHd8N27l5AfYs36tl8a5n4sMos8kw7zI5ojA6K3tbyrLRyPAk2EF439CubK0XX5ad0JLr9gnpZwzKrNo5Kd2A==
+zwiftout@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/zwiftout/-/zwiftout-1.0.0.tgz#58dd2f2cf556e97a8a0b7385a2429f4cb2f5fabf"
+  integrity sha512-N1IOERpuInNUwTn8vL97lH/Tuwy8wjTE2XhUybBplmmK9AcPSgSx2Ll4fQXnGHEtEG0Sen5ev9Kv3lgQrdmReQ==
   dependencies:
     argparse "^2.0.1"
     ramda "^0.27.1"

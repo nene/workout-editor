@@ -1,5 +1,7 @@
+import React, { useCallback } from "react";
 import Editor from "react-simple-code-editor";
 import styled from "styled-components";
+import { ZwiftoutException } from "zwiftout";
 
 const highlight = (code: string): string => {
   return code
@@ -11,7 +13,7 @@ const highlight = (code: string): string => {
     .replace(/@(.*?)$/gm, "<code class='comment-start'>@</code><code class='comment'>$1</code>");
 };
 
-export const CodeEditor = styled(Editor).attrs({ padding: 10, highlight })`
+export const BaseCodeEditor = styled(Editor).attrs({ padding: 10 })`
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
   font-size: 14px;
   line-height: 1.3;
@@ -46,4 +48,26 @@ export const CodeEditor = styled(Editor).attrs({ padding: 10, highlight })`
     font-style: italic;
     color: #888;
   }
+  code.error {
+    background-color: rgba(252, 152, 152, 0.5);
+    border-radius: 4px;
+  }
 `;
+
+const highlightErrorLine = (code: string, linenr: number): string => {
+  const regex = new RegExp(`^((?:[^\\n]*?\\n){${linenr}})([^\\n]*?)\\n`);
+  return code.replace(regex, "$1<code class='error'>$2</code>\n");
+};
+
+interface CodeEditorProps {
+  value: string;
+  onValueChange: (value: string) => void;
+  error: ZwiftoutException | undefined;
+}
+
+export const CodeEditor: React.FC<CodeEditorProps> = ({ value, onValueChange, error }) => {
+  const highlightFn = useCallback((code: string) => highlight(error ? highlightErrorLine(code, error.loc.row) : code), [
+    error,
+  ]);
+  return <BaseCodeEditor value={value} onValueChange={onValueChange} highlight={highlightFn} />;
+};

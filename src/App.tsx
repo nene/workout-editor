@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { WorkoutPlot } from "./components/WorkoutPlot";
 import { WorkoutStats } from "./components/WorkoutStats";
-import { parse } from "zwiftout";
+import { parse, ParseError, ValidationError, ZwiftoutException } from "zwiftout";
 import { ErrorMessage } from "./components/ErrorMessage";
 import styled from "styled-components";
 import { CodeEditor } from "./components/CodeEditor";
@@ -32,7 +32,7 @@ const AppContainer = styled.div`
 export function App() {
   const [text, setText] = useState(defaultWorkout);
   const [workout, setWorkout] = useState(parse(defaultWorkout));
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<ZwiftoutException | undefined>(undefined);
 
   const onChange = useCallback(
     (value: string) => {
@@ -41,7 +41,11 @@ export function App() {
         setWorkout(parse(value));
         setError(undefined);
       } catch (e) {
-        setError(e.message);
+        if (e instanceof ParseError || e instanceof ValidationError) {
+          setError(e);
+        } else {
+          throw e;
+        }
       }
     },
     [setText, setWorkout, setError],
@@ -50,9 +54,9 @@ export function App() {
   return (
     <AppContainer>
       <AppTitle />
-      <CodeEditor onValueChange={onChange} value={text} />
+      <CodeEditor onValueChange={onChange} value={text} error={error} />
       <WorkoutPlot intervals={workout.intervals} />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
       <WorkoutStats workout={workout} />
       <ZwoOutput workout={workout} />
       <Credits />
