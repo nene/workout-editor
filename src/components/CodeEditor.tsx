@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import Editor from "react-simple-code-editor";
 import styled from "styled-components";
-import { ZwiftoutException } from "zwiftout";
+import { ValidationError, ZwiftoutException } from "zwiftout";
 
 const highlight = (code: string): string => {
   return code
@@ -48,15 +48,20 @@ export const BaseCodeEditor = styled(Editor).attrs({ padding: 10 })`
     font-style: italic;
     color: #888;
   }
-  code.error {
+  code.parse-error {
     background-color: rgba(252, 152, 152, 0.5);
+    border-radius: 4px;
+  }
+  code.validation-error {
+    background-color: rgba(252, 209, 152, 0.5);
     border-radius: 4px;
   }
 `;
 
-const highlightErrorLine = (code: string, linenr: number): string => {
-  const regex = new RegExp(`^((?:[^\\n]*?\\n){${linenr}})([^\\n]*?)\\n`);
-  return code.replace(regex, "$1<code class='error'>$2</code>\n");
+const highlightErrorLine = (code: string, error: ZwiftoutException): string => {
+  const regex = new RegExp(`^((?:[^\\n]*?\\n){${error.loc.row}})([^\\n]*?)\\n`);
+  const className = error instanceof ValidationError ? "validation-error" : "parse-error";
+  return code.replace(regex, `$1<code class='${className}'>$2</code>\n`);
 };
 
 interface CodeEditorProps {
@@ -66,8 +71,6 @@ interface CodeEditorProps {
 }
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({ value, onValueChange, error }) => {
-  const highlightFn = useCallback((code: string) => highlight(error ? highlightErrorLine(code, error.loc.row) : code), [
-    error,
-  ]);
+  const highlightFn = useCallback((code: string) => highlight(error ? highlightErrorLine(code, error) : code), [error]);
   return <BaseCodeEditor value={value} onValueChange={onValueChange} highlight={highlightFn} />;
 };
