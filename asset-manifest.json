@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/workout-editor/static/css/main.20aa8553.chunk.css",
-    "main.js": "/workout-editor/static/js/main.76098227.chunk.js",
-    "main.js.map": "/workout-editor/static/js/main.76098227.chunk.js.map",
+    "main.js": "/workout-editor/static/js/main.37322d68.chunk.js",
+    "main.js.map": "/workout-editor/static/js/main.37322d68.chunk.js.map",
     "runtime-main.js": "/workout-editor/static/js/runtime-main.766fd1ba.js",
     "runtime-main.js.map": "/workout-editor/static/js/runtime-main.766fd1ba.js.map",
-    "static/js/2.fc15246b.chunk.js": "/workout-editor/static/js/2.fc15246b.chunk.js",
-    "static/js/2.fc15246b.chunk.js.map": "/workout-editor/static/js/2.fc15246b.chunk.js.map",
+    "static/js/2.6273579e.chunk.js": "/workout-editor/static/js/2.6273579e.chunk.js",
+    "static/js/2.6273579e.chunk.js.map": "/workout-editor/static/js/2.6273579e.chunk.js.map",
     "index.html": "/workout-editor/index.html",
-    "precache-manifest.2437805b529fa7d9364ffd43a6de789e.js": "/workout-editor/precache-manifest.2437805b529fa7d9364ffd43a6de789e.js",
+    "precache-manifest.a3aea11d709b4ceb1c561e848b5dad90.js": "/workout-editor/precache-manifest.a3aea11d709b4ceb1c561e848b5dad90.js",
     "service-worker.js": "/workout-editor/service-worker.js",
     "static/css/main.20aa8553.chunk.css.map": "/workout-editor/static/css/main.20aa8553.chunk.css.map",
-    "static/js/2.fc15246b.chunk.js.LICENSE.txt": "/workout-editor/static/js/2.fc15246b.chunk.js.LICENSE.txt"
+    "static/js/2.6273579e.chunk.js.LICENSE.txt": "/workout-editor/static/js/2.6273579e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.766fd1ba.js",
-    "static/js/2.fc15246b.chunk.js",
+    "static/js/2.6273579e.chunk.js",
     "static/css/main.20aa8553.chunk.css",
-    "static/js/main.76098227.chunk.js"
+    "static/js/main.37322d68.chunk.js"
   ]
 }
