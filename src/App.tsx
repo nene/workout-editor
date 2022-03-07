@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { WorkoutPlot } from "./components/WorkoutPlot";
 import { WorkoutStats } from "./components/WorkoutStats";
 import { parse, ParseError, ValidationError, ZwiftoutException } from "zwiftout";
@@ -8,21 +8,7 @@ import { CodeEditor } from "./components/CodeEditor";
 import { ZwoOutput } from "./components/ZwoOutput";
 import { AppTitle } from "./components/AppTitle";
 import { Credits } from "./components/Credits";
-
-const defaultWorkout = `Name: Sample workout
-Description: Try changing it, and see what happens below.
-
-Warmup: 10:00 30%..75%
-Interval: 15:00 100% 90rpm
-  @ 00:00 Start off easy
-  @ 01:00 Settle into rhythm
-  @ 07:30 Half way through
-  @ 14:00 Final minute, stay strong!
-Rest: 10:00 75%
-FreeRide: 20:00
-  @ 00:10 Just have some fun, riding as you wish
-Cooldown: 10:00 70%..30%
-`;
+import { loadWorkout, saveWorkout } from "./storage";
 
 const AppContainer = styled.div`
   max-width: 800px;
@@ -30,8 +16,9 @@ const AppContainer = styled.div`
 `;
 
 export function App() {
-  const [text, setText] = useState(defaultWorkout);
-  const [workout, setWorkout] = useState(parse(defaultWorkout));
+  const [loaded, setLoaded] = useState(false);
+  const [text, setText] = useState("");
+  const [workout, setWorkout] = useState(parse(""));
   const [error, setError] = useState<ZwiftoutException | undefined>(undefined);
 
   const onChange = useCallback(
@@ -50,6 +37,15 @@ export function App() {
     },
     [setText, setWorkout, setError],
   );
+
+  useEffect(() => {
+    if (loaded) {
+      saveWorkout(text);
+    } else {
+      setLoaded(true);
+      onChange(loadWorkout());
+    }
+  }, [text, onChange, setLoaded, loaded]);
 
   return (
     <AppContainer>
