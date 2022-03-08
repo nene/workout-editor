@@ -5,7 +5,10 @@ import { ValidationError, ZwiftoutException } from "zwiftout";
 
 const highlight = (code: string): string => {
   return code
-    .replace(/^(Name|Author|Description|Warmup|Rest|Interval|Cooldown|FreeRide):/gm, "<code class='keyword'>$&</code>")
+    .replace(
+      /^(Name|Author|Description|Warmup|Rest|Interval|Cooldown|FreeRide|Ramp):/gm,
+      "<code class='keyword'>$&</code>",
+    )
     .replace(/-?(\d{1,2}:)?\d{1,2}:\d{1,2}/g, "<code class='duration'>$&</code>")
     .replace(/\d+%/g, "<code class='intensity'>$&</code>")
     .replace(/\d+rpm/g, "<code class='cadence'>$&</code>")
