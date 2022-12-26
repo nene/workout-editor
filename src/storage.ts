@@ -13,9 +13,21 @@ FreeRide: 20:00
 Cooldown: 10:00 70%..30%
 `;
 
+const loadFromUrlHash = (): string | undefined => {
+  if (document.location.hash) {
+    // Skip the leading '#' when decoding
+    return decodeURIComponent(document.location.hash.slice(1));
+  }
+  return undefined;
+};
+
+const loadFromLocalStorage = (): string | undefined => {
+  const text = localStorage.getItem("workout-editor-text");
+  return !text || text.trim() === "" ? undefined : text;
+};
+
 export const loadWorkout = (): string => {
-    const text = localStorage.getItem("workout-editor-text");
-    return (!text || text.trim() === "") ? defaultWorkout : text;
+  return loadFromUrlHash() ?? loadFromLocalStorage() ?? defaultWorkout;
 };
 
 export const saveWorkout = (text: string) => localStorage.setItem("workout-editor-text", text);
