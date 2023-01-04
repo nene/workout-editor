@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Workout, generateZwo } from "zwiftout";
 import styled from "styled-components";
-import { download } from "../download";
+import { DownloadButton } from "./DownloadButton";
 
 const Header = styled.h2`
   font-weight: normal;
@@ -21,25 +21,13 @@ const ShowHideButton = styled.button`
   float: right;
 `;
 
-const DownloadButton = styled.button`
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  padding: 3px 8px;
-  margin-left: 16px;
-`;
-
-// Creates .zwo file name from workout name
-const workoutFileName = (name: string): string => name.replace(/[^\w]/, "-").replace(/-+/, "-").toLowerCase() + ".zwo";
-
 export const ZwoOutput: React.FC<{ workout: Workout }> = ({ workout }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div>
       <Header>
         Generated Zwift workout file (.zwo):
-        <DownloadButton onClick={() => download(workoutFileName(workout.name), generateZwo(workout))}>
-          Download
-        </DownloadButton>
+        <DownloadButton workout={workout} />
       </Header>
       <ZwoCode>
         <ShowHideButton onClick={() => setExpanded(!expanded)}>{expanded ? "Hide ZWO" : "Show ZWO"}</ShowHideButton>
