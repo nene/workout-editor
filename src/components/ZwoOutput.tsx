@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Workout, generateZwo } from "zwiftout";
 import styled from "styled-components";
 
@@ -13,11 +13,22 @@ const ZwoCode = styled.pre`
   padding: 10px;
 `;
 
+const ShowHideButton = styled.button`
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding: 3px 8px;
+  float: right;
+`;
+
 export const ZwoOutput: React.FC<{ workout: Workout }> = ({ workout }) => {
+  const [expanded, setExpanded] = useState(false);
   return (
     <div>
       <Header>Generated Zwift workout file (.zwo):</Header>
-      <ZwoCode>{generateZwo(workout)}</ZwoCode>
+      <ZwoCode>
+        <ShowHideButton onClick={() => setExpanded(!expanded)}>{expanded ? "Hide ZWO" : "Show ZWO"}</ShowHideButton>
+        {expanded ? generateZwo(workout) : ""}
+      </ZwoCode>
     </div>
   );
 };
